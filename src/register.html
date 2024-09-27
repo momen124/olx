@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubizzle Clone - Register</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif; /* Set the font family */
+            margin: 0; /* Remove default margins */
+            padding: 0; /* Remove default padding */
+            background-color: #f4f4f4; /* Set background color */
+            color: #333; /* Set text color */
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Arrange content in a column */
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
+        }
+        .navbar { 
+            display: flex; /* Use flexbox for navbar */
+            justify-content: space-between; /* Space out logo and links */
+            background-color: #004d61; /* Set navbar background color */
+            padding: 1em; /* Add padding to navbar */
+        }
+        .navbar .logo a { 
+            color: #ffcc29; /* Set logo link color */
+            text-decoration: none; /* Remove underline from logo link */
+            font-size: 30px; /* Set logo font size */
+            font-weight: bold; /* Make logo text bold */
+        }
+        .navbar .nav-links { 
+            list-style-type: none; /* Remove bullets from list */
+            display: flex; /* Use flexbox for nav links */
+            gap: 25px; /* Space between nav links */
+        }
+        .navbar .nav-links li a { 
+            color: white; /* Set link text color */
+            text-decoration: none; /* Remove underline from links */
+            font-size: 20px; /* Set font size for links */
+        }
+        .footer { 
+            background-color: #004d61; /* Set footer background color */
+            color: white; /* Set footer text color */
+            text-align: center; /* Center align footer text */
+            padding: 1em; /* Add padding to footer */
+            margin-top: auto; /* Push footer to bottom of the page */
+        }
+        .footer-links { 
+            list-style-type: none; /* Remove bullets from footer links */
+            display: flex; /* Use flexbox for footer links */
+            justify-content: center; /* Center align footer links */
+            gap: 20px; /* Space between footer links */
+        }
+        .footer-links a { 
+            color: white; /* Set footer link text color */
+            text-decoration: none; /* Remove underline from footer links */
+        }
+        .form-container { 
+            max-width: 600px; /* Set max width for the form container */
+            margin: 60px auto; /* Center the form container */
+            padding: 40px; /* Add padding inside the form container */
+            border: 10px solid #ddd; /* Set border for form container */
+            background-color: white; /* Set background color for form container */
+            border-radius: 8px; /* Round the corners of the form container */
+            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1); /* Add shadow to the form container */
+            display: flex; /* Use flexbox for layout inside the form container */
+            flex-direction: column; /* Arrange form elements in a column */
+            justify-content: center; /* Center the form elements vertically */
+            align-items: center; /* Center the form elements horizontally */
+            flex: 1; /* Allow the form container to grow and take available space */
+        }
+        form input { 
+            padding: 12px; /* Add padding to input fields */
+            margin-bottom: 12px; /* Space between input fields */
+            border: 3px solid #004d61; /* Set border color for input fields */
+            border-radius: 5px; /* Round the corners of input fields */
+            width: 70%; /* Make input fields take full width */
+        }
+        form button { 
+            padding: 10px; /* Add padding to the button */
+            background-color: #004d61; /* Set button background color */
+            color: white; /* Set button text color */
+            border: none; /* Remove border from button */
+            border-radius: 6px; /* Round the corners of the button */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            width: 40%; /* Make button take full width */
+        }
+        form button:hover { 
+            background-color: #003846; /* Change button color on hover */
+        }
+        .social-login button { 
+            display: inline-block; /* Display social login buttons inline */
+            padding: 15px 20px; /* Add padding to social login buttons */
+            margin-right: 10px; /* Space between social login buttons */
+            background-color: #ddd; /* Set background color for social buttons */
+            border: none; /* Remove border from social buttons */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+        .social-login button:hover { 
+            background-color: #bbb; /* Change social button color on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/">Dubizzle Clone</a> <!-- Logo link -->
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li> <!-- Link to home page -->
+            <li><a href="login.html">Login</a></li> <!-- Link to login page -->
+            <li><a href="register.html">Register</a></li> <!-- Link to register page -->
+            <li><a href="#profile">Profile</a></li> <!-- Link to profile section -->
+        </ul>
+    </nav>
+
+    <!-- Register Section -->
+    <section id="register" style="flex: 1;"> <!-- Register section, flex grow to fill available space -->
+        <h1>Create a New Account</h1> <!-- Heading for register section -->
+        <div class="form-container">
+            <!-- Registration form with schema markup -->
+            <form action="/register" method="post" itemscope itemtype="https://schema.org/RegisterAction">
+                <input type="text" name="username" placeholder="Username" required itemprop="username"> <!-- Username input -->
+                <input type="email" name="email" placeholder="Email" required itemprop="email"> <!-- Email input -->
+                <input type="password" name="password" placeholder="Password" required itemprop="password"> <!-- Password input -->
+                <button type="submit">Register</button> <!-- Submit button for register -->
+            </form>
+            <p>Or sign up with:</p> <!-- Alternative sign up options -->
+            <div class="social-login">
+                <button>Register with Google</button> <!-- Button for Google sign up -->
+                <button>Register with Facebook</button> <!-- Button for Facebook sign up -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Dubizzle Clone. All rights reserved.</p> <!-- Copyright notice -->
+        <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li> <!-- Link to privacy policy -->
+            <li><a href="#">About</a></li> <!-- Link to about page -->
+            <li><a href="#">Contact</a></li> <!-- Link to contact page -->
+        </ul>
+    </footer>
+
+</body>
+</html>
