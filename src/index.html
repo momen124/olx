@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubizzle Clone - Home</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Arrange children in a column */
+            min-height: 100vh; /* Ensure body takes full height */
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            background-color: #004d61;
+            padding: 1em;
+        }
+        .navbar .logo a {
+            color: #ffcc29;
+            text-decoration: none;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .navbar .nav-links {
+            list-style-type: none;
+            display: flex;
+            gap: 25px;
+        }
+        .navbar .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .footer {
+            background-color: #004d61;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            margin-top: auto; /* Push the footer to the bottom */
+        }
+        .footer-links {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        .search-bar {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .search-bar input {
+            padding: 10px;
+            width: 250px;
+            border: 4px solid #004d61;
+            border-radius: 6px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #ffcc29;
+            color: #004d61;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        .search-bar button:hover {
+            background-color: #f0a500;
+        }
+        /* Center the content vertically */
+        #home {
+            flex: 1; /* Take up remaining space */
+            display: flex; /* Use flexbox for centering */
+            flex-direction: column; /* Arrange children in a column */
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            text-align: center; /* Center text */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="home.html">Dubizzle Clone</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="#profile">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <h1>Welcome to Dubizzle Clone</h1>
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search listings...">
+            <button>Search</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Dubizzle Clone. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </footer>
+
+</body>
+</html>
