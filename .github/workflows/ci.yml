@@ -1,0 +1,116 @@
+name: CI Pipeline
+
+# When to run the workflow: push events, pull requests, and on schedule
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Jobs to run as part of CI
+jobs:
+  linting:
+    name: Lint Codebase
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run ESLint (Code Linting)
+        run: npm run lint
+
+  security_check:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Security Audit (npm audit)
+        run: npm audit --audit-level=high
+
+  unit_tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Unit Tests
+        run: npm test -- --ci --coverage
+
+  formatting:
+    name: Enforce Code Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Prettier (Code Formatting)
+        run: npm run format:check
+
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Project
+        run: npm run build
+
+  no_force_push:
+    name: Prevent Force Push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure No Force Push on Main
+        run: |
+          git fetch
+          git rev-list HEAD..origin/main --count
+          if [[ $(git rev-list HEAD..origin/main --count) -ne 0 ]]; then
+            echo "Force pushes detected! Preventing the action."
+            exit 1
+          fi
+        shell: bash
