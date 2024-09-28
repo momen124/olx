@@ -17,7 +17,7 @@
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
     "react-router-dom": "^6.26.2",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^3.0.1",
     "socket.io-client": "^4.8.0",
     "tailwindcss": "^3.4.13",
     "typescript": "^4.9.5",
@@ -26,9 +26,14 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "eject": "react-scripts eject",
+    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "format": "prettier --write './src/**/*.{ts,tsx}'",
+    "format:check": "prettier --check './src/**/*.{ts,tsx}'",
+    "test": "react-scripts test --ci --coverage",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "audit:fix": "npm audit fix",
+    "audit:force": "npm audit fix --force"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +55,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "@types/socket.io-client": "^3.0.0"
+    "@types/socket.io-client": "^3.0.0",
+    "prettier": "^3.3.3"
   }
 }
