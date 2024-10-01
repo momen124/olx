@@ -1,37 +1,35 @@
-import React, { useState } from 'react';
-import Header from '../components/layout/Header';
-import Footer from '../components/layout/Footer';
-import ChatList from '../components/chat/ChatList';
-import ChatWindow from '../components/chat/ChatWindow';
+import React from 'react';
 
+// Chat Page Component
 const ChatPage: React.FC = () => {
-  const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null);
+    return (
+        <div className="flex flex-col h-screen"> {/* Basic styling for the body */}
+            {/* Navbar section */}
+            <div className="bg-gray-800 text-white p-3 text-center"> {/* Navbar styling */}
+                Navbar
+            </div>
 
-  const handleSelectConversation = (conversationId: string) => {
-    setSelectedConversationId(conversationId);
-  };
+            {/* Inbox list section */}
+            <div className="flex-grow p-5 border border-gray-300 overflow-y-auto"> {/* Inbox list styling */}
+                {/* Example of chat conversations */}
+                <div className="p-4 mb-2 border-b border-gray-300 cursor-pointer hover:bg-gray-100"> {/* Individual conversation item */}
+                    <strong>User 1:</strong> Last message from User 1
+                </div>
+                <div className="p-4 mb-2 border-b border-gray-300 cursor-pointer hover:bg-gray-100"> {/* Individual conversation item */}
+                    <strong>User 2:</strong> Last message from User 2
+                </div>
+                <div className="p-4 mb-2 border-b border-gray-300 cursor-pointer hover:bg-gray-100"> {/* Individual conversation item */}
+                    <strong>User 3:</strong> Last message from User 3
+                </div>
+                {/* More conversations can go here */}
+            </div>
 
-  return (
-    <>
-      <Header />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Chat</h1>
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="flex h-[calc(100vh-200px)]">
-            <ChatList onSelectConversation={handleSelectConversation} />
-            {selectedConversationId ? (
-              <ChatWindow conversationId={selectedConversationId} />
-            ) : (
-              <div className="w-2/3 flex items-center justify-center text-gray-500">
-                Select a conversation to start chatting.
-              </div>
-            )}
-          </div>
+            {/* Footer section */}
+            <footer className="bg-gray-800 text-white p-3 text-center"> {/* Footer styling */}
+                Footer
+            </footer>
         </div>
-      </main>
-      <Footer />
-    </>
-  );
+    );
 };
 
-export default ChatPage;
+export default ChatPage; // Export the ChatPage component
