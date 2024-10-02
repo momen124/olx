@@ -6,5 +6,5 @@ export const loginSchema = z.object({
   password: z.string().min(1, { message: 'Password is required' }),
 });
 
-
-type LoginData = z.infer<typeof loginSchema>;
+// Remove this if it's not used
+// type LoginData = z.infer<typeof loginSchema>;
