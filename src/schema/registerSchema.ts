@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 // Define register schema
-const registerSchema = z.object({
+export const registerSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
   password: z.string().min(6, { message: 'Password must be at least 6 characters long' }),
   confirmPassword: z.string().min(6, { message: 'Confirm Password must be at least 6 characters long' }),
@@ -10,4 +10,5 @@ const registerSchema = z.object({
   message: "Passwords don't match",
 });
 
-type RegisterData = z.infer<typeof registerSchema>;
+// Remove this if it's not used
+// type RegisterData = z.infer<typeof registerSchema>;

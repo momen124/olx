@@ -28,11 +28,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({ filters }) => {
   useEffect(() => {
     const filterResults = () => {
       let results = allResults;
-
+  
       if (filters.category !== 'All Categories') {
         results = results.filter(item => item.title.toLowerCase().includes(filters.category.toLowerCase()));
       }
-
+  
       if (filters.minPrice != null) {
         results = results.filter(item => item.price >= filters.minPrice!);
       }
@@ -41,21 +41,20 @@ const SearchResults: React.FC<SearchResultsProps> = ({ filters }) => {
         results = results.filter(item => item.price <= filters.maxPrice!);
       }
       
-      
-
       if (filters.location) {
         results = results.filter(item => item.location.toLowerCase().includes(filters.location.toLowerCase()));
       }
-
+  
       if (filters.datePosted !== 'Any time') {
         results = results.filter(item => item.datePosted === filters.datePosted);
       }
-
+  
       setFilteredResults(results);
     };
-
+  
     filterResults();
-  }, [filters]);
+  }, [filters.category, filters.minPrice, filters.maxPrice, filters.location, filters.datePosted]); // Add missing dependencies here
+  
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

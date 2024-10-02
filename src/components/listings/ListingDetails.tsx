@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const ListingDetails: React.FC = () => {
@@ -10,7 +11,7 @@ const ListingDetails: React.FC = () => {
       <div className="mb-6">
         <h2 className="text-xl font-semibold mb-2">Seller Information</h2>
         <div className="flex items-center mb-2">
-          <img src="https://picsum.photos/50/50" alt="Seller Avatar" className="w-10 h-10 rounded-full mr-3" />
+          <Image src="https://picsum.photos/50/50" alt="Seller Avatar" className="w-10 h-10 rounded-full mr-3" />
           <span className="font-medium">John Doe</span>
         </div>
         <button className="bg-green-500 text-white px-4 py-2 rounded w-full hover:bg-green-600">

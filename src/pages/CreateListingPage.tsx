@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Footer from '../components/layout/Footer';
 import Header from '../components/layout/Header';
+import Image from 'next/image';
 
 const CreateListingPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -187,7 +188,7 @@ const CreateListingPage: React.FC = () => {
     });
 
     try {
-      const response = await axios.post('/api/listings', finalFormData, {
+      await axios.post('/api/listings', finalFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -197,6 +198,7 @@ const CreateListingPage: React.FC = () => {
       console.error('Error creating listing:', error);
       alert('An error occurred while creating the listing. Please try again.');
     }
+    
   };
 
   return (
@@ -320,7 +322,7 @@ const CreateListingPage: React.FC = () => {
         {/* Image Preview */}
         <div id="imagePreview" className="mb-4 flex flex-wrap gap-2">
           {imagePreviews.map((preview, index) => (
-            <img key={index} src={preview} alt="Preview" className="w-24 h-24 object-cover rounded" />
+            <Image key={index} src={preview} alt="Preview" className="w-24 h-24 object-cover rounded" />
           ))}
         </div>
 

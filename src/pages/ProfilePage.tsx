@@ -1,15 +1,12 @@
 import React from 'react';
-import { useState } from 'react';
 
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import Image from 'next/image';
 
 const Profile = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
 
-    const toggleMenu = () => {
-        setMenuOpen(!menuOpen);
-    };
+
 
     return (
         <div className="bg-gray-100 font-sans">
@@ -19,7 +16,7 @@ const Profile = () => {
                 <h1 className="text-3xl font-bold mb-6">Profile</h1>
                 <section className="bg-white rounded-lg shadow-md p-6 mb-8">
                     <div className="flex flex-col md:flex-row items-center md:items-start">
-                        <img src="https://picsum.photos/200/200?random=profile" alt="User profile" className="w-32 h-32 rounded-full object-cover mb-4 md:mb-0 md:mr-6" />
+                        <Image src="https://picsum.photos/200/200?random=profile" alt="User profile" className="w-32 h-32 rounded-full object-cover mb-4 md:mb-0 md:mr-6" />
                         <div className="text-center md:text-left">
                             <h2 className="text-3xl font-bold mb-2">John Doe</h2>
                             <p className="text-gray-600 mb-2">New York, NY</p>
@@ -34,7 +31,7 @@ const Profile = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[1, 2, 3].map((index) => (
                             <div key={index} className="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition duration-300">
-                                <img src={`https://picsum.photos/400/300?random=${index + 3}`} alt={`Listing ${index}`} className="w-full h-48 object-cover" />
+                                <Image src={`https://picsum.photos/400/300?random=${index + 3}`} alt={`Listing ${index}`} className="w-full h-48 object-cover" />
                                 <div className="p-4">
                                     <h3 className="font-semibold text-lg mb-2">Listing Title {index}</h3>
                                     <p className="text-gray-600 font-bold">${(index * 100) + 99}</p>

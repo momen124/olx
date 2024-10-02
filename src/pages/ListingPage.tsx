@@ -21,7 +21,7 @@ const ListingPage: React.FC = () => {
           <div className="p-6 border-t">
             <h2 className="text-2xl font-semibold mb-4">Description</h2>
             <p className="text-gray-700 mb-4">
-              The iPhone 12 Pro Max is the largest iPhone in Apple's 2020 lineup. It features a 6.7-inch Super Retina XDR OLED display, 5G connectivity, A14 Bionic chip, and a pro camera system with 12MP ultra wide, wide, and telephoto lenses. This device is in excellent condition with minimal signs of use.
+              The iPhone 12 Pro Max is the largest iPhone in Apple&apos;s 2020 lineup. It features a 6.7-inch Super Retina XDR OLED display, 5G connectivity, A14 Bionic chip, and a pro camera system with 12MP ultra wide, wide, and telephoto lenses. This device is in excellent condition with minimal signs of use.
             </p>
             <h3 className="text-xl font-semibold mb-2">Key Features:</h3>
             <ul className="list-disc list-inside text-gray-700 mb-4">
@@ -34,7 +34,7 @@ const ListingPage: React.FC = () => {
               <li>iOS 14</li>
             </ul>
             <p className="text-gray-700">
-              This iPhone 12 Pro Max is unlocked and compatible with all major carriers. It comes with the original charger and cable. Don't miss this opportunity to own one of the most advanced smartphones on the market at a great price!
+              This iPhone 12 Pro Max is unlocked and compatible with all major carriers. It comes with the original charger and cable. Don&apos;t miss this opportunity to own one of the most advanced smartphones on the market at a great price!
             </p>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const RelatedListings: React.FC = () => {
@@ -13,7 +14,7 @@ const RelatedListings: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {relatedListings.map((listing) => (
           <div key={listing.id} className="bg-white rounded shadow overflow-hidden">
-            <img src={listing.imageUrl} alt={listing.title} className="w-full h-48 object-cover" />
+            <Image src={listing.imageUrl} alt={listing.title} className="w-full h-48 object-cover" />
             <div className="p-4">
               <h3 className="font-semibold text-lg mb-2">{listing.title}</h3>
               <p className="text-gray-600">{listing.price}</p>
