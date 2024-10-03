@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/react-router-dom": "^5.3.3",
     "@types/socket.io-client": "^3.0.0",
     "prettier": "^3.3.3"
   }
