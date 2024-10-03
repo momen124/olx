@@ -1,6 +1,6 @@
 name: CI Pipeline
 
-# When to run the workflow: push events, pull requests, and on schedule
+# When to run the workflow: push events, pull requests
 on:
   push:
     branches:
@@ -9,98 +9,108 @@ on:
     branches:
       - main
 
-# Jobs to run as part of CI
 jobs:
-  linting:
-    name: Lint Codebase
+  test_lint_build:
+    name: Test, Lint, Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]  # Using Node.js 20.x like in the first workflow
+    env:
+      BE_URL: http://localhost:6900
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Step 3: Install pnpm for better performance
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.1.1
+          run_install: false
+
+      # Step 4: Cache pnpm store to improve build times
+      - name: Get pnpm store directory
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-store-
+
+      # Step 5: Cache node_modules to avoid reinstallation on every run
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules/
+          key: ${{ runner.os }}-node-modules-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-node-modules-
+
+      # Step 6: Install dependencies using pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Step 7: Run Linting, Type Checking, and Unit Tests
+      - name: Run Linting, Type Checking, and Unit Tests
+        run: |
+          pnpm run lint         # Lint the code
+          pnpm run check-types  # Check TypeScript types
+          pnpm run test -- --ci --coverage  # Run unit tests
+
+      # Step 8: Build the project
+      - name: Build the project
+        run: pnpm run build
+
+  # Job 2: Security audit for vulnerabilities
+  security_audit:
+    name: Run Security Audit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20.x'
 
       - name: Install Dependencies
-        run: npm ci
-
-      - name: Run ESLint (Code Linting)
-        run: npm run lint
-
-  security_check:
-    name: Security Audit
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install Dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Run Security Audit (npm audit)
-        run: npm audit --audit-level=high
+        run: pnpm audit --audit-level=high
 
-  unit_tests:
-    name: Run Unit Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Run Unit Tests
-        run: npm test -- --ci --coverage
-
-  formatting:
+  # Job 3: Enforce code formatting with Prettier
+  enforce_formatting:
     name: Enforce Code Formatting
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20.x'
 
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
-      - name: Run Prettier (Code Formatting)
-        run: npm run format:check
+      - name: Check Code Formatting (Prettier)
+        run: pnpm run format:check
 
-  build:
-    name: Build Project
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Build Project
-        run: npm run build
-
+  # Job 4: Prevent force-pushes to the main branch
   no_force_push:
     name: Prevent Force Push
     runs-on: ubuntu-latest
